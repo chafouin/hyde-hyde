@@ -1,3 +1,5 @@
+[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg?style=flat)](https://github.com/htr3n/hyde-hyde/blob/master/LICENSE.md) ![GitHub release](https://img.shields.io/github/release/htr3n/hyde-hyde.svg) ![GitHub stars](https://img.shields.io/github/stars/htr3n/hyde-hyde.svg) ![GitHub forks](https://img.shields.io/github/forks/htr3n/hyde-hyde.svg) ![GitHub issues](https://img.shields.io/github/issues/htr3n/hyde-hyde.svg) ![GitHub issues closed](https://img.shields.io/github/issues-closed/htr3n/hyde-hyde.svg)
+
 # Hyde-hyde
 
 __`Hyde-hyde`__ is a [Hugo](https://gohugo.io)'s theme inspired and derived from @spf13's [Hyde](https://github.com/spf13/hyde.git) and [Nate Finch's blog](https://npf.io). 
@@ -7,9 +9,14 @@ __`Hyde-hyde`__ is a [Hugo](https://gohugo.io)'s theme inspired and derived from
 Since version 2.0, __`hyde-hyde`__ has been overhauled and, therefore, might cause some disruptions.
 
 * The main styles are refactored and redeveloped using SCSS (see [_static-src/scss_](https://github.com/htr3n/hyde-hyde/blob/master/static-src/scss)),  `poole.css` and `hyde.css` are no longer needed because `hyde-hyde.scss` already incorporates relevant elements (I still keep them there for reference purpose)
+  * Per PR [#45 by [@jd4no](https://github.com/jd4no), `hyde-hyde` can use SCSSs diectly in the templates instead of the generated CSSs. The generated CSSs and the generated resources are still kept in `hyde-hyde` in order to ensure the demo on [Hugo theme site](https://themes.gohugo.io) working.
 * The layouts have been heavily restructured and modularised further (see [_layouts_](https://github.com/htr3n/hyde-hyde/blob/master/layouts))
 * Adding '[_Portfolio_](https://github.com/htr3n/hyde-hyde/blob/master/layouts/portfolio)' page inspired by Xiaoying Riley (@3rdwave_themes) [Developer-Theme](https://github.com/xriley/developer-theme)
 * Switching to use system fonts instead of Web fonts (e.g. privacy issues)
+* Experimenting a collapsible menu in mobile mode
+* Adding _Table of Contents_
+  * Configure using `.Site.Params.toc` with two possible value: "hugo" (using Hugo `{{ .TableOfContents }}`, and "tocbot" (using [Tocbot](https://tscanlin.github.io/tocbot/)), remove `.Site.Params.toc` to disable TOC
+  * Tocbot can be configured in [_layouts/partials/page-single/footer.html_](_layouts/partials/page-single/footer.html_) with options as described in [its documentation](https://tscanlin.github.io/tocbot/#api)
 
 For more details, please refer to [CHANGELOG](https://github.com/htr3n/hyde-hyde/blob/master/CHANGELOG.md).  A real site in action can be found [here](https://htr3n.github.io) and its [WIP source](https://github.com/htr3n/htr3n-blog) for reference.
 
@@ -62,6 +69,10 @@ __`Hyde-hyde`__ essentially inherits most of Hyde's [options](https://github.com
 
 * `GraphCommentId = "your-graphcomment-id"`: to use [GraphComment](https://graphcomment.com) instead of the built-in [Disqus](https://disqus.com). This option should be used exclusively with `disqusShortname = "disqus-shortname"`.
 
+* `UtterancesRepo = "your-repo-name"`: to use [Utterances](https://utteranc.es/) instead of the built-in [Disqus](https://disqus.com). This option should be used exclusively with `disqusShortname = "disqus-shortname"`.
+  * `UtterancesIssueTerm = "pathname"` Method for Utterances to match issue's to posts (pathname, url, title, og:title)
+  * `UtterancesTheme = "github-light"` Theme for Utterances (github-light, github-dark)
+
 * `[params.social]`: in this section, you can set many social identities such as Twitter, Facebook, Github, Bitbucket, Gitlab, Instagram, LinkedIn, StackOverflow, Medium, Xing, Keybase.
 
   ```toml
@@ -72,7 +83,12 @@ __`Hyde-hyde`__ essentially inherits most of Hyde's [options](https://github.com
   	...
   ```
 
-  
+  * Per PR [#56](https://github.com/htr3n/hyde-hyde/commit/5ed13e17400bbc09a342b60fd50cd9fe3e6f1525), Gravatar pics can be used exclusively to `.Site.Params.authorimage` via the parameter `.Site.Params.social.gravatar`
+
+    * ```toml
+      [params.social]
+      	gravatar = "your.email@domain.com"
+      ```
 
 ### Customisations
 
@@ -86,7 +102,7 @@ Since version 2.0+, I added a portfolio page just in case. If you need it, simpl
 [[menu.main]]
     name = "Portfolio"
     identifier = "portfolio"
-    weight = xxx
+    weight = xyz
     url = "/portfolio/"
 ```
 
@@ -154,17 +170,16 @@ If you want to adjust the portfolio page to your needs, please have a look at th
 
 
 
+### Mobile Mode with Collapsible Menu
+
+<img src='https://github.com/htr3n/hyde-hyde/raw/master/images/mobile.png' alt='hyde-hyde in mobile mode' width='60%'>
+
 ## Author(s)
 
-### Original Developed by Mark Otto
+* Original developed by [Mark Otto](https://github.com/mdo)
 
-- <https://github.com/mdo>
-- <https://twitter.com/mdo>
-
-### Hugo's Hyde Ported by Steve Francia
-- <https://github.com/spf13>
-- <https://twitter.com/spf13>
+* Hugo's `hyde` ported by [Steve Francia](https://github.com/spf13)
 
 ## License
 
-Open sourced under the [MIT license](LICENSE.md).
+Open sourced under the [MIT license](LICENSE.md)
